@@ -1,0 +1,73 @@
+
+<body class="py-5">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4" *ngIf="_authService.isAdmin()==false">
+    <a class="navbar-brand" [routerLink]="['home']">MyAdoption</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['home']" [routerLinkActive]="['activado']">Home</a>
+        </li>
+        <li class="nav-item " *ngIf="_authService.isAuth()">
+          <a class="nav-link" [routerLink]="['myProfile']" [routerLinkActive]="['activado']">My Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['posts']" [routerLinkActive]="['activado']">Posts</a>
+        </li>
+        <li class="nav-item" *ngIf="_authService.isAuth()">
+          <a class="nav-link" [routerLink]="['notifications']" [routerLinkActive]="['activado']">Notifications</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Organization
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="['adminPosts']">Admin Posts</a></li>
+            <li><a class="dropdown-item" [routerLink]="['home']">About us</a></li>
+            <li><a class="dropdown-item" [routerLink]="['contact']">Contact us</a></li>
+
+          </ul>
+        </li>
+        <li class="nav-item" *ngIf="_authService.isAuth()">
+          <a class="nav-link" [routerLink]="['chat']" [routerLinkActive]="['activado']">Chat</a>
+        </li>
+        <li class="nav-item" *ngIf="_authService.isAuth()==false">
+          <a class="nav-link" [routerLink]="['login']" [routerLinkActive]="['activado']">Login</a>
+        </li>
+
+        <li class="nav-item" *ngIf="_authService.isAuth()">
+          <a class="nav-link" data-bs-toggle="modal" data-bs-target="#modalLogout">Logout</a>
+        </li>
+        <li class="nav-item" *ngIf="_authService.isAuth()==false">
+          <a class="nav-link" [routerLink]="['register']" [routerLinkActive]="['activado']">Register</a>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <!-- Modal -->
+  <div class="modal fade" id="modalLogout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Log Out</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure to log out?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
+          <button type="button" (click)="logout()" data-bs-dismiss="modal" class="btn btn-success">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+
+</body>
